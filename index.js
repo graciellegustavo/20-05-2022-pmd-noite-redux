@@ -1,3 +1,6 @@
+const Redux = require('redux')
+const { createStore, combineReducers } = Redux
+
 //arrow function
 //nome: criarContratos
 //recebe: nome e valor
@@ -75,3 +78,29 @@ const listaReducer = (contratos = [], acao) => {
 
     return contratos
 }
+
+const todosOsReducers = combineReducers({
+    historicoDePedidosCashbackReducer,
+    caixaReducer,
+    listaReducer
+})
+
+const store = createStore(todosOsReducers)
+
+//criar um contrato para o josé
+const acaoContratoDoZé = criarContratos("José", 50)
+store.dispatch(acaoContratoDoZé) 
+
+const acaoContratoDoBelo = criarContratos(" Belo", 50000000)
+store.dispatch(acaoContratoDoBelo)
+
+const acaoContratoDaGraci = criarContratos("Graci", 1000000000)
+store.dispatch(acaoContratoDaGraci)
+
+const cashbackBelo = solicitarCashback("Belo", 20)
+store.dispatch(cashbackBelo)
+
+const cancelarJose = cancelarContrato("José")
+store.dispatch(cancelarJose)
+
+console.log(store.getState())
